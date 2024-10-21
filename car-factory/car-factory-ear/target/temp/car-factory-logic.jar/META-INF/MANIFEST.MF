@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Created-By: Maven EJB Plugin 3.2.1
+Build-Jdk-Spec: 17
+Class-Path: javax.ws.rs-javax.ws.rs-api-2.0.1.jar org.thymeleaf-thymelea
+ f-2.1.4.RELEASE.jar ognl-ognl-3.0.8.jar org.javassist-javassist-3.16.1-
+ GA.jar org.unbescape-unbescape-1.1.0.RELEASE.jar org.slf4j-slf4j-api-1.
+ 6.6.jar javax.transaction-jta-1.1.jar javax.mail-mail-1.5.0-b01.jar jav
+ ax.activation-activation-1.1.jar com.h2database-h2-1.4.190.jar org.glas
+ sfish.grizzly-grizzly-http-server-2.3.24.jar org.glassfish.grizzly-griz
+ zly-http-2.3.24.jar org.glassfish.grizzly-grizzly-framework-2.3.24.jar 
+ org.glassfish.jersey.containers-jersey-container-grizzly2-http-2.0-m05-
+ 2.jar org.glassfish.jersey.core-jersey-common-2.0-m05-2.jar org.glassfi
+ sh.jersey.core-jersey-server-2.0-m05-2.jar org.glassfish.jersey.media-j
+ ersey-media-json-jackson-2.22.1.jar org.glassfish.jersey.ext-jersey-ent
+ ity-filtering-2.22.1.jar com.fasterxml.jackson.jaxrs-jackson-jaxrs-base
+ -2.5.4.jar com.fasterxml.jackson.core-jackson-core-2.5.4.jar com.faster
+ xml.jackson.core-jackson-databind-2.5.4.jar com.fasterxml.jackson.jaxrs
+ -jackson-jaxrs-json-provider-2.5.4.jar com.fasterxml.jackson.module-jac
+ kson-module-jaxb-annotations-2.5.4.jar com.fasterxml.jackson.core-jacks
+ on-annotations-2.5.4.jar org.glassfish.jersey.core-jersey-client-2.0-m0
+ 5-2.jar com.googlecode.guava-osgi-guava-osgi-11.0.1.jar org.glassfish.h
+ k2-hk2-api-2.1.17.jar org.glassfish.hk2-osgi-resource-locator-1.0.1.jar
+  javax.inject-javax.inject-1.jar org.glassfish.hk2-hk2-utils-2.1.17.jar
+  org.glassfish.hk2-hk2-locator-2.1.17.jar org.glassfish.hk2.external-ja
+ vax.inject-2.1.17.jar org.glassfish.hk2.external-asm-all-repackaged-2.1
+ .17.jar org.glassfish.hk2.external-cglib-2.1.17.jar org.hibernate.javax
+ .persistence-hibernate-jpa-2.1-api-1.0.0.Final.jar org.hibernate.valida
+ tor-hibernate-validator-6.1.0.Final.jar jakarta.validation-jakarta.vali
+ dation-api-2.0.2.jar org.jboss.logging-jboss-logging-3.3.2.Final.jar co
+ m.fasterxml-classmate-1.3.4.jar org.hibernate-hibernate-entitymanager-5
+ .0.5.Final.jar org.hibernate-hibernate-core-5.0.5.Final.jar antlr-antlr
+ -2.7.7.jar org.jboss-jandex-2.0.0.Final.jar dom4j-dom4j-1.6.1.jar xml-a
+ pis-xml-apis-1.0.b2.jar org.hibernate.common-hibernate-commons-annotati
+ ons-5.0.1.Final.jar org.jboss.spec.javax.faces-jboss-jsf-api_2.2_spec-2
+ .2.13.jar org.hibernate-hibernate-validator-annotation-processor-5.1.3.
+ Final.jar org.projectlombok-lombok-1.18.24.jar
+

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+   <groupId>org.car-factory</groupId>
+    <artifactId>car-factory</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+
+  <artifactId>car-factory-ear</artifactId>
+  <packaging>ear</packaging>
+  
+  <name>car-factory-ear</name>
+  <description>A simple car-factory-ear.</description>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+
+
+  <build>
+      <plugins>
+      
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+      
+
+      
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-ear-plugin</artifactId>
+        		<version>3.2.0</version>
+         <configuration>
+    
+    <modules>
+        <ejbModule>
+            <groupId>${project.groupId}</groupId> 
+            <artifactId>car-factory-logic</artifactId>bModule>
+            <bundleFileName>car-factory-logic.jar</bundleFileName>
+            </ejbModule>
+            
+        <ejbModule>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>car-factory-rest</artifactId>
+            <bundleFileName>car-factory-rest.jar</bundleFileName>
+        </ejbModule>
+        <webModule>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>car-factory-web</artifactId>
+            <bundleFileName>car-factory-web.war</bundleFileName>
+            <contextRoot>/car-factory-web</contextRoot>
+        </webModule>
+    </modules>
+    <applicationXml>${basedir}/src/main/resources/META-INF/application.xml</applicationXml>
+    <generateApplicationXml>false</generateApplicationXml>
+</configuration>
+
+        </plugin>
+        <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                 <version>${wildfly.maven.plugin}</version> 
+                <configuration>
+                <filename>${project.artifactId}.ear</filename>
+                    <skip>false</skip>
+                    <hostname>localhost</hostname>
+                    <port>9990</port>
+                    <username>postgres</username>
+                    <password>postgres</password>
+                </configuration>       
+            </plugin>
+      </plugins>
+  </build>
+  
+  <dependencies>
+
+  	<dependency>
+  		<groupId>${project.groupId}</groupId>
+  		<artifactId>car-factory-logic</artifactId>
+  		<version>${project.version}</version>		<type>ejb</type>
+  	</dependency>
+  	<dependency>
+  		<groupId>${project.groupId}</groupId>
+  		<artifactId>car-factory-rest</artifactId>
+  		<version>${project.version}</version>
+  		<type>ejb</type>
+  	</dependency>
+  	  	<dependency>
+  		<groupId>${project.groupId}</groupId>
+  		<artifactId>car-factory-web</artifactId>
+  		<version>${project.version}</version>
+  		<type>war</type>
+  	</dependency>
+  	<!-- https://mvnrepository.com/artifact/javassist/javassist -->
+
+
+</dependencies>
+ 
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>

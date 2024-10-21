@@ -1,0 +1,15 @@
+org\car_factory\car_factory_logic\entity\Body.class
+org\car_factory\car_factory_logic\entity\Transmission.class
+org\car_factory\car_factory_logic\entity\Transmission_.class
+org\car_factory\car_factory_logic\dao\BodyEJB.class
+org\car_factory\car_factory_logic\dao\CarEJB.class
+org\car_factory\car_factory_logic\CarFactoryApplication.class
+org\car_factory\car_factory_logic\dao\EngineEJB.class
+org\car_factory\car_factory_logic\dao\BaseEJB.class
+org\car_factory\car_factory_logic\entity\Engine.class
+org\car_factory\car_factory_logic\entity\Engine_.class
+org\car_factory\car_factory_logic\dao\TransmissionEJB.class
+org\car_factory\car_factory_logic\entity\Car_.class
+org\car_factory\car_factory_logic\utils\EntityManagerProducer.class
+org\car_factory\car_factory_logic\entity\Car.class
+org\car_factory\car_factory_logic\entity\Body_.class

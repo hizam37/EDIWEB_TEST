@@ -1,6 +1,8 @@
 package org.car_factory.car_factory_logic.entity;
 
 import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +29,7 @@ public class Body implements Serializable{
 	private String color;
 	
 	private int doorCount;
+	
 	
 	private String vin;
 

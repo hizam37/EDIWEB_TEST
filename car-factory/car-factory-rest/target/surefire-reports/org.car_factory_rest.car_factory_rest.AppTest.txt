@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.car_factory_rest.car_factory_rest.AppTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 s -- in org.car_factory_rest.car_factory_rest.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 s -- in org.car_factory_rest.car_factory_rest.AppTest

@@ -93,7 +93,7 @@
             table.border = "1";
 
             const headerRow = table.insertRow();
-            const headers = ["ID", "Engine Type", "Transmission Type", "Body Type", "Color", "Door Count", "VIN"];
+            const headers = ["ID", "Engine Type", "Engine Serial Number", "Transmission Type", "Transmission Serial Number", "Body Type", "Color", "Door Count", "VIN"];
             headers.forEach(headerText => {
                 const headerCell = document.createElement("th");
                 headerCell.appendChild(document.createTextNode(headerText));
@@ -104,11 +104,13 @@
                 const row = table.insertRow();
                 row.insertCell(0).appendChild(document.createTextNode(car.id));
                 row.insertCell(1).appendChild(document.createTextNode(car.engine.type));
-                row.insertCell(2).appendChild(document.createTextNode(car.transmission.type));
-                row.insertCell(3).appendChild(document.createTextNode(car.body.type));
-                row.insertCell(4).appendChild(document.createTextNode(car.body.color));
-                row.insertCell(5).appendChild(document.createTextNode(car.body.doorCount));
-                row.insertCell(6).appendChild(document.createTextNode(car.body.vin));
+                row.insertCell(2).appendChild(document.createTextNode(car.engine.serialNumber));
+                row.insertCell(3).appendChild(document.createTextNode(car.transmission.type));
+                row.insertCell(4).appendChild(document.createTextNode(car.transmission.serialNumber));
+                row.insertCell(5).appendChild(document.createTextNode(car.body.type));
+                row.insertCell(6).appendChild(document.createTextNode(car.body.color));
+                row.insertCell(7).appendChild(document.createTextNode(car.body.doorCount));
+                row.insertCell(8).appendChild(document.createTextNode(car.body.vin));
             });
 
             carsListDiv.appendChild(table);

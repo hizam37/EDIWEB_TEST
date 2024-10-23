@@ -129,59 +129,95 @@
     }
 
 	function displayCars(cars) {
-	    const carsListDiv = document.getElementById("carsList");
-	    carsListDiv.innerHTML = "";
+		const carsListDiv = document.getElementById("carsList");
+		carsListDiv.innerHTML = "";
 
-	    if (cars.length === 0) {
-	        carsListDiv.innerHTML = "<p>No cars found.</p>";
-	        return;
-	    }
+		if (cars.length === 0) {
+			carsListDiv.innerHTML = "<p>No cars found.</p>";
+			return;
+		}
 
-	    const table = document.createElement("table");
-	    table.border = "1";
+		const table = document.createElement("table");
+		table.border = "1";
 
-	    const headerRow = table.insertRow();
-	    const headers = ["ID", "Engine Type", "Engine Serial Number", "Transmission Type", "Transmission Serial Number", "Body Type", "Color", "Door Count", "VIN"];
-	    headers.forEach(headerText => {
-	        const headerCell = document.createElement("th");
-	        headerCell.appendChild(document.createTextNode(headerText));
-	        headerRow.appendChild(headerCell);
-	    });
+		const headerRow = table.insertRow();
+		const headers = ["ID", "Engine Type", "Engine Volume", "Engine Power", "Engine Serial Number", 
+	                     "Transmission Type", "Transmission Serial Number", "Body Type", "Color", 
+	                     "Door Count", "VIN"];
+		headers.forEach(headerText => {
+			const headerCell = document.createElement("th");
+			headerCell.appendChild(document.createTextNode(headerText));
+			headerRow.appendChild(headerCell);
+		});
 
-	    cars.forEach(car => {
-	        const row = table.insertRow();
-	        row.addEventListener('click', () => selectCar(car)); // Add click event to the row
-	        row.insertCell(0).appendChild(document.createTextNode(car.id));
-	        row.insertCell(1).appendChild(document.createTextNode(car.engine.type));
-	        row.insertCell(2).appendChild(document.createTextNode(car.engine.serialNumber));
-	        row.insertCell(3).appendChild(document.createTextNode(car.transmission.type));
-	        row.insertCell(4).appendChild(document.createTextNode(car.transmission.serialNumber));
-	        row.insertCell(5).appendChild(document.createTextNode(car.body.type));
-	        row.insertCell(6).appendChild(document.createTextNode(car.body.color));
-	        row.insertCell(7).appendChild(document.createTextNode(car.body.doorCount));
-	        row.insertCell(8).appendChild(document.createTextNode(car.body.vin));
-	    });
+		cars.forEach(car => {
+			const row = table.insertRow();
 
-	    carsListDiv.appendChild(table);
+			const cellsData = [
+				car.id,
+				car.engine.type,
+				car.engine.volume,
+				car.engine.powerKw,
+				car.engine.serialNumber,
+				car.transmission.type,
+				car.transmission.serialNumber,
+				car.body.type,
+				car.body.color,
+				car.body.doorCount,
+				car.body.vin
+			];
+
+			cellsData.forEach((data, index) => {
+				const cell = row.insertCell(index);
+				const span = document.createElement('span');
+				span.textContent = data;
+				span.style.cursor = 'pointer';
+				span.addEventListener('click', () => selectCellValue(car, index));
+				cell.appendChild(span);
+			});
+		});
+
+		carsListDiv.appendChild(table);
 	}
 
-	function selectCar(car) {
-	    document.getElementById('engineType').value = car.engine.type;
-	    document.getElementById('engineVolume').value = car.engine.volume;
-	    document.getElementById('enginePowerKw').value = car.engine.powerKw;
-	    document.getElementById('engineSerialNumber').value = car.engine.serialNumber;
 
-	    document.getElementById('transmissionType').value = car.transmission.type;
-	    document.getElementById('transmissionSerialNumber').value = car.transmission.serialNumber;
+	function selectCellValue(carData, index) {
+		const fieldIds = [
+			'engineType',
+			'engineVolume',
+			'enginePowerKw',
+			'engineSerialNumber',
+			'transmissionType',
+			'transmissionSerialNumber',
+			'bodyType',
+			'bodyColor',
+			'bodyDoorCount',
+			'bodyVin'
+		];
 
-	    document.getElementById('bodyType').value = car.body.type;
-	    document.getElementById('bodyColor').value = car.body.color;
-	    document.getElementById('bodyDoorCount').value = car.body.doorCount;
-	    document.getElementById('bodyVin').value = car.body.vin;
-
-	    // Update the currentCar with the selected car for further updates
-	    currentCar = car;
+		switch(index) {
+			case 1: 
+				// Similar handling for Engine
+				document.getElementById(fieldIds[0]).value = carData.engine.type; // Engine Type
+				document.getElementById(fieldIds[1]).value = carData.engine.volume; // Engine Volume
+				document.getElementById(fieldIds[2]).value = carData.engine.powerKw; // Engine Power Kw
+				document.getElementById(fieldIds[3]).value = carData.engine.serialNumber; // Engine Serial Number
+				break;
+			case 5: 
+				// Similar handling for Transmission
+				document.getElementById(fieldIds[4]).value = carData.transmission.type; // Transmission Type
+				document.getElementById(fieldIds[5]).value = carData.transmission.serialNumber; // Transmission Serial Number
+				break;
+			case 7: 
+				// Similar handling for Body
+				document.getElementById(fieldIds[6]).value = carData.body.type; // Body Type
+				document.getElementById(fieldIds[7]).value = carData.body.color; // Body Color
+				document.getElementById(fieldIds[8]).value = carData.body.doorCount; // Body Door Count
+				document.getElementById(fieldIds[9]).value = carData.body.vin; // VIN
+				break;
+		}
 	}
+
 
     function sortCars() {
         const sortBy = document.getElementById('sortSelect').value;
@@ -192,9 +228,11 @@
 <body>
 
 	<h1>Car Modification Section</h1>
-
+	
+	<h1>Update the car using the sorted list and then click on the component you to change</h1>
+   
 	<div class="car-component" id="carId"></div>
-
+ 
 	<div class="car-component">
 		<div class="component-title">Engine Information</div>
 		<input type="text" id="engineType" placeholder="Engine Type" /> <input

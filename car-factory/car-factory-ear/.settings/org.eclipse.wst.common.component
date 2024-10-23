@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                                        
+                                                
+    
+    
     
     
     
@@ -9,7 +11,9 @@
     
     
     <wb-module deploy-name="car-factory-ear">
-                                                                                
+                                                                                                
+        
+        
         
         
         
@@ -19,7 +23,9 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
-                                                                                
+                                                                                                
+        
+        
         
         
         
@@ -185,7 +191,9 @@
         <dependent-module archiveName="org.projectlombok-lombok-1.18.24.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                                                                            
+                                                                                            
+    
+    
     
     
     
@@ -195,7 +203,9 @@
     
     
     </wb-module>
-                                    
+                                            
+
+
 
 
 

@@ -44,39 +44,72 @@ public class CarController {
 	@POST
 	@Path("/create")
 	public Response createCar(Car car) {
+	    // Validate that transmission and engine serial numbers match
+	    if (car.getTransmission() == null || car.getEngine() == null 
+	        || !car.getTransmission().getSerialNumber().equals(car.getEngine().getSerialNumber())) {
+	        return Response.status(Response.Status.FORBIDDEN)
+	                .entity("Serial number for transmission and engine should be the same").build();
+	    }
 
-		if (!car.getTransmission().getSerialNumber().equals(car.getEngine().getSerialNumber())) {
-			return Response.status(Response.Status.FORBIDDEN)
-					.entity("Serial number for transmission and engine should be the same").build();
-		}
+	    Collection<Car> carList = carEJB.findAll();
+	    for (Car perCar : carList) {
+	        // Check for VIN uniqueness only if VIN is non-null
+	        if (perCar.getBody() != null && perCar.getBody().getVin() != null 
+	            && perCar.getBody().getVin().equals(car.getBody() != null ? car.getBody().getVin() : null)) {
+	            return Response.status(Response.Status.CONFLICT).entity("VIN must be unique").build();
+	        }
 
-		Collection<Car> carList = carEJB.findAll();
-		for (Car perCar : carList) {
+	        // Check for existing engine and transmission serial numbers
+	        if ((perCar.getTransmission() != null 
+	                && perCar.getTransmission().getSerialNumber() != null 
+	                && perCar.getTransmission().getSerialNumber().equals(car.getTransmission() != null ? car.getTransmission().getSerialNumber() : null))
+	            || (perCar.getEngine() != null 
+	                && perCar.getEngine().getSerialNumber() != null 
+	                && perCar.getEngine().getSerialNumber().equals(car.getEngine() != null ? car.getEngine().getSerialNumber() : null))) {
+	            return Response.status(Response.Status.CONFLICT)
+	                    .entity("A car with the same engine or transmission serial number already exists").build();
+	        }
+	    }
 
-			if (perCar.getBody().getVin().equals(car.getBody().getVin())) {
-				return Response.status(Response.Status.CONFLICT).entity("VIN must be unique").build();
-			}
-
-			if ((perCar.getTransmission().getSerialNumber().equals(car.getTransmission().getSerialNumber())
-					&& !perCar.getBody().getVin().equals(car.getBody().getVin()))
-					|| (perCar.getEngine().getSerialNumber().equals(car.getEngine().getSerialNumber())
-							&& !perCar.getBody().getVin().equals(car.getBody().getVin()))) {
-				return Response.status(Response.Status.CONFLICT)
-						.entity("A car with the same engine or transmission serial number already exists").build();
-			}
-		}
-
-	
-		carEJB.create(car);
-		return Response.status(Response.Status.CREATED).build();
+	    // If all validations pass, create the car
+	    carEJB.create(car);
+	    return Response.status(Response.Status.CREATED).build();
 	}
 
+
+	
+	//Here we are updating the components(Engine,Transmission,Body) of the car separately 
 	@PUT
 	@Path("/update")
 	public Response update(Car car) {
-		carEJB.edit(car);
-		return Response.status(Response.Status.CREATED).build();
+		Car existingCar = carEJB.findById(car.getId());
+		if (existingCar == null) {
+			return Response.status(Response.Status.NOT_FOUND).entity("Car not found").build();
+		}
 
+		if (!existingCar.getEngine().getSerialNumber().equals(car.getEngine().getSerialNumber())) {
+			existingCar.getEngine().setType(null);
+			existingCar.getEngine().setVolume(0);
+			existingCar.getEngine().setPowerKw(0);
+			existingCar.getEngine().setSerialNumber(null);
+			carEJB.edit(existingCar);
+		}
+
+		if (!existingCar.getTransmission().getSerialNumber().equals(car.getTransmission().getSerialNumber())) {
+			existingCar.getTransmission().setType(null);
+			existingCar.getTransmission().setSerialNumber(null);
+			carEJB.edit(existingCar);
+		}
+
+		if (!existingCar.getBody().getVin().equals(car.getBody().getVin())) {
+			existingCar.getBody().setType(null);
+			existingCar.getBody().setDoorCount(0);
+			existingCar.getBody().setColor(null);
+			existingCar.getBody().setVin(null);
+			carEJB.edit(existingCar);
+		}
+
+		return Response.ok(existingCar).build(); // Return updated car
 	}
 
 	@GET
@@ -94,8 +127,7 @@ public class CarController {
 	@Path("/getCarById/{id}")
 	public Response getCarById(@PathParam("id") Long id) {
 		Car car = carEJB.findById(id);
-		if(car==null)
-		{
+		if (car == null) {
 			return Response.status(Response.Status.NOT_FOUND).entity("Please enter id of the car").build();
 		}
 		return Response.status(Response.Status.ACCEPTED).entity(car).build();
@@ -137,15 +169,12 @@ public class CarController {
 		}
 		transmissionEJB.removeById(id);
 	}
-	
-	
+
 	@GET
-    @Path("/sortBy/{the_component_to_be_sorted}")
-    public Response sortBy(@PathParam("the_component_to_be_sorted") String the_component_to_be_sorted) {
+	@Path("/sortBy/{the_component_to_be_sorted}")
+	public Response sortBy(@PathParam("the_component_to_be_sorted") String the_component_to_be_sorted) {
 		Collection<Car> cars = carEJB.sortBy(the_component_to_be_sorted);
 		return Response.ok(cars).build();
-    }
-	
-	
+	}
 
 }
